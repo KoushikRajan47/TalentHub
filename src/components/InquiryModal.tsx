@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Send, CheckCircle2, DollarSign, Calendar, MessageSquare } from "lucide-react";
+import { X, Send, CheckCircle2, IndianRupee, Calendar, MessageSquare } from "lucide-react";
 import confetti from "canvas-confetti";
 import { Talent } from "@/types";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
@@ -16,7 +16,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ talent, onClose }) =
     clientName: "",
     clientEmail: "",
     projectTitle: "",
-    budget: "$3,000 - $5,000",
+    budget: "₹1,00,000 - ₹2,50,000",
     timeline: "2-4 Weeks",
     message: "",
   });
@@ -103,7 +103,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ talent, onClose }) =
                   Send Project Proposal to {talent.name}
                 </h3>
                 <p className="text-xs text-slate-400">
-                  Rate: ${talent.hourlyRate}/hr • Verified Response Time: &lt; 4h
+                  Rate: ₹{talent.hourlyRate.toLocaleString("en-IN")}/hr • Verified Response Time: &lt; 4h
                 </p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ talent, onClose }) =
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-slate-400 mb-1.5 font-medium flex items-center gap-1">
-                    <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+                    <IndianRupee className="w-3.5 h-3.5 text-emerald-400" />
                     Estimated Budget Range
                   </label>
                   <select
@@ -173,10 +173,11 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({ talent, onClose }) =
                     }
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-blue-500 cursor-pointer"
                   >
-                    <option value="$1,000 - $3,000">$1,000 - $3,000</option>
-                    <option value="$3,000 - $5,000">$3,000 - $5,000</option>
-                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                    <option value="$10,000+">$10,000+ (Enterprise Retainer)</option>
+                    <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000</option>
+                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                    <option value="₹1,00,000 - ₹2,50,000">₹1,00,000 - ₹2,50,000</option>
+                    <option value="₹2,50,000 - ₹5,00,000">₹2,50,000 - ₹5,00,000</option>
+                    <option value="₹5,00,000+">₹5,00,000+ (Enterprise Retainer)</option>
                   </select>
                 </div>
 

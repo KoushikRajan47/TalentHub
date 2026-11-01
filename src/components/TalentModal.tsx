@@ -89,7 +89,7 @@ export const TalentModal: React.FC<TalentModalProps> = ({
           <div className="w-full sm:w-auto flex flex-row sm:flex-col items-center sm:items-end justify-between gap-3 pt-4 sm:pt-0 border-t sm:border-t-0 border-slate-800">
             <div className="sm:text-right">
               <span className="text-2xl font-black text-emerald-400">
-                ${talent.hourlyRate}
+                ₹{talent.hourlyRate.toLocaleString("en-IN")}
               </span>
               <span className="text-xs text-slate-400">/hr</span>
               <p className="text-[11px] text-slate-500 font-medium">

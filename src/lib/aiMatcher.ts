@@ -80,7 +80,7 @@ export function computeAIMatches(
         score += 10;
       } else {
         const overage = talent.hourlyRate - params.maxBudget;
-        score -= Math.min(25, Math.round(overage / 5));
+        score -= Math.min(25, Math.round(overage / 100));
       }
     }
 

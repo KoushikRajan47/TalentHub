@@ -21,7 +21,7 @@ export const JoinModal: React.FC<JoinModalProps> = ({
     name: "",
     title: "",
     category: "engineering" as TalentCategory,
-    hourlyRate: 85,
+    hourlyRate: 2500,
     experienceYears: 4,
     location: "Remote",
     skills: "Next.js, TypeScript, Tailwind CSS, Node.js",
@@ -205,11 +205,12 @@ export const JoinModal: React.FC<JoinModalProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-slate-400 mb-1 font-medium">Hourly Rate ($)</label>
+                  <label className="block text-slate-400 mb-1 font-medium">Hourly Rate (₹)</label>
                   <input
                     type="number"
-                    min="30"
-                    max="300"
+                    min="500"
+                    max="15000"
+                    step="100"
                     value={formData.hourlyRate}
                     onChange={(e) =>
                       setFormData({ ...formData, hourlyRate: Number(e.target.value) })

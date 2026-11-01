@@ -33,7 +33,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       searchQuery: "",
       category: "all",
       selectedSkills: [],
-      maxRate: 150,
+      maxRate: 5000,
       availability: "all",
       sortBy: "rating",
     });
@@ -43,7 +43,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     filters.searchQuery ||
     filters.category !== "all" ||
     filters.selectedSkills.length > 0 ||
-    filters.maxRate < 150 ||
+    filters.maxRate < 5000 ||
     filters.availability !== "all";
 
   return (
@@ -99,17 +99,17 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <span className="text-slate-400 text-xs">Max Rate:</span>
             <input
               type="range"
-              min="50"
-              max="150"
-              step="5"
+              min="1500"
+              max="6000"
+              step="250"
               value={filters.maxRate}
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, maxRate: Number(e.target.value) }))
               }
               className="w-20 accent-blue-500 cursor-pointer"
             />
-            <span className="font-semibold text-blue-400 text-xs sm:text-sm w-12 text-right">
-              ${filters.maxRate}/h
+            <span className="font-semibold text-blue-400 text-xs sm:text-sm min-w-[70px] text-right">
+              ₹{filters.maxRate.toLocaleString("en-IN")}/h
             </span>
           </div>
 

@@ -57,7 +57,7 @@ export const TalentCard: React.FC<TalentCardProps> = ({
           {/* Hourly Rate */}
           <div className="text-right shrink-0">
             <div className="text-base font-bold text-emerald-400">
-              ${talent.hourlyRate}
+              ₹{talent.hourlyRate.toLocaleString("en-IN")}
               <span className="text-xs font-normal text-slate-400">/hr</span>
             </div>
             <span className="inline-block text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">

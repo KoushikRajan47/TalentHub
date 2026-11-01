@@ -28,7 +28,7 @@ export const AIMatchModal: React.FC<AIMatchModalProps> = ({
   onHireTalent,
 }) => {
   const [prompt, setPrompt] = useState("");
-  const [maxBudget, setMaxBudget] = useState<number>(140);
+  const [maxBudget, setMaxBudget] = useState<number>(4500);
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState("");
   const [results, setResults] = useState<{ match: AIMatchResult; talent: Talent }[] | null>(null);
@@ -128,7 +128,7 @@ export const AIMatchModal: React.FC<AIMatchModalProps> = ({
               rows={3}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="e.g. We need a senior Next.js and Go engineer to build a high-speed dashboard with WebSockets. Budget is up to $120/hr, starting in two weeks..."
+              placeholder="e.g. We need a senior Next.js and Go engineer to build a high-speed dashboard with WebSockets. Budget is up to ₹3,500/hr, starting in two weeks..."
               className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
             />
           </div>
@@ -160,15 +160,15 @@ export const AIMatchModal: React.FC<AIMatchModalProps> = ({
               <span className="text-xs text-slate-400">Target Max Rate:</span>
               <input
                 type="range"
-                min="60"
-                max="150"
-                step="5"
+                min="1500"
+                max="6000"
+                step="250"
                 value={maxBudget}
                 onChange={(e) => setMaxBudget(Number(e.target.value))}
                 className="w-24 accent-blue-500 cursor-pointer"
               />
-              <span className="text-xs font-bold text-blue-400 w-12 text-right">
-                ${maxBudget}/hr
+              <span className="text-xs font-bold text-blue-400 min-w-[70px] text-right">
+                ₹{maxBudget.toLocaleString("en-IN")}/hr
               </span>
             </div>
 
@@ -245,7 +245,7 @@ export const AIMatchModal: React.FC<AIMatchModalProps> = ({
                             </span>
                           )}
                           <span className="text-xs text-slate-400 font-medium">
-                            ${talent.hourlyRate}/hr
+                            ₹{talent.hourlyRate.toLocaleString("en-IN")}/hr
                           </span>
                         </div>
                         <p className="text-xs text-slate-400 line-clamp-1">{talent.title}</p>

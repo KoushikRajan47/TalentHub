@@ -14,7 +14,7 @@ create table if not exists public.profiles (
   tagline text,
   avatar_url text,
   bio text,
-  hourly_rate numeric(10, 2) default 75.00,
+  hourly_rate numeric(10, 2) default 2500.00,
   experience_years integer default 3,
   location text default 'Remote',
   category text not null check (category in ('engineering', 'design', 'ai', 'devops', 'mobile')),

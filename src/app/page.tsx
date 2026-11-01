@@ -26,7 +26,7 @@ export default function Home() {
     searchQuery: "",
     category: "all",
     selectedSkills: [],
-    maxRate: 150,
+    maxRate: 5000,
     availability: "all",
     sortBy: "rating",
   });
@@ -173,7 +173,7 @@ export default function Home() {
                     searchQuery: "",
                     category: "all",
                     selectedSkills: [],
-                    maxRate: 150,
+                    maxRate: 5000,
                     availability: "all",
                     sortBy: "rating",
                   })
