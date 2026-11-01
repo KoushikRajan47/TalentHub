@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { Star, ShieldCheck, MapPin, Briefcase, ExternalLink, MessageSquare } from "lucide-react";
+import { Star, ShieldCheck, MapPin, Briefcase, ExternalLink, MessageSquare, Heart } from "lucide-react";
 import { Talent } from "@/types";
 
 interface TalentCardProps {
   talent: Talent;
+  isSaved?: boolean;
+  onToggleSave?: (id: string) => void;
   onSelect: (talent: Talent) => void;
   onHire: (talent: Talent) => void;
   onSkillClick: (skill: string) => void;
@@ -13,6 +15,8 @@ interface TalentCardProps {
 
 export const TalentCard: React.FC<TalentCardProps> = ({
   talent,
+  isSaved = false,
+  onToggleSave,
   onSelect,
   onHire,
   onSkillClick,
@@ -54,15 +58,34 @@ export const TalentCard: React.FC<TalentCardProps> = ({
             </div>
           </div>
 
-          {/* Hourly Rate */}
-          <div className="text-right shrink-0">
-            <div className="text-base font-bold text-emerald-400">
-              ₹{talent.hourlyRate.toLocaleString("en-IN")}
-              <span className="text-xs font-normal text-slate-400">/hr</span>
+          {/* Right Header: Rate & Bookmark */}
+          <div className="flex items-start gap-2">
+            <div className="text-right shrink-0">
+              <div className="text-base font-bold text-emerald-400">
+                ₹{talent.hourlyRate.toLocaleString("en-IN")}
+                <span className="text-xs font-normal text-slate-400">/hr</span>
+              </div>
+              <span className="inline-block text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">
+                {talent.experienceYears}y exp
+              </span>
             </div>
-            <span className="inline-block text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-800 text-slate-300">
-              {talent.experienceYears}y exp
-            </span>
+
+            {onToggleSave && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleSave(talent.id);
+                }}
+                className={`p-1.5 rounded-lg border transition cursor-pointer ${
+                  isSaved
+                    ? "bg-rose-500/20 border-rose-500/40 text-rose-400"
+                    : "bg-slate-800/80 border-slate-700/80 text-slate-400 hover:text-rose-400 hover:bg-slate-800"
+                }`}
+                title={isSaved ? "Remove from saved" : "Save talent"}
+              >
+                <Heart className={`w-3.5 h-3.5 ${isSaved ? "fill-rose-500 text-rose-500" : ""}`} />
+              </button>
+            )}
           </div>
         </div>
 

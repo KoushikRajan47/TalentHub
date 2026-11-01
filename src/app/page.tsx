@@ -9,6 +9,7 @@ import { TalentModal } from "@/components/TalentModal";
 import { InquiryModal } from "@/components/InquiryModal";
 import { AIMatchModal } from "@/components/AIMatchModal";
 import { JoinModal } from "@/components/JoinModal";
+import { SavedModal } from "@/components/SavedModal";
 import { Footer } from "@/components/Footer";
 import { INITIAL_TALENTS } from "@/data/mockTalents";
 import { Talent, FilterState } from "@/types";
@@ -21,6 +22,8 @@ export default function Home() {
   const [selectedTalentHire, setSelectedTalentHire] = useState<Talent | null>(null);
   const [isAIMatchOpen, setIsAIMatchOpen] = useState(false);
   const [isJoinOpen, setIsJoinOpen] = useState(false);
+  const [isSavedOpen, setIsSavedOpen] = useState(false);
+  const [savedIds, setSavedIds] = useState<string[]>([]);
 
   const [filters, setFilters] = useState<FilterState>({
     searchQuery: "",
@@ -30,6 +33,30 @@ export default function Home() {
     availability: "all",
     sortBy: "rating",
   });
+
+  // Initialize saved favorites from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("talenthub_saved_ids");
+      if (stored) {
+        setSavedIds(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.warn("Could not read saved talents from localStorage:", e);
+    }
+  }, []);
+
+  const toggleSave = (id: string) => {
+    setSavedIds((prev) => {
+      const updated = prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+      try {
+        localStorage.setItem("talenthub_saved_ids", JSON.stringify(updated));
+      } catch (e) {
+        console.warn("Could not persist saved talents:", e);
+      }
+      return updated;
+    });
+  };
 
   // Optional: fetch live profiles from Supabase if credentials are provided
   useEffect(() => {
@@ -122,6 +149,8 @@ export default function Home() {
       <Navbar
         onOpenAIMatch={() => setIsAIMatchOpen(true)}
         onOpenJoin={() => setIsJoinOpen(true)}
+        onOpenSaved={() => setIsSavedOpen(true)}
+        savedCount={savedIds.length}
         totalTalents={talents.length}
       />
 
@@ -147,6 +176,8 @@ export default function Home() {
               <TalentCard
                 key={talent.id}
                 talent={talent}
+                isSaved={savedIds.includes(talent.id)}
+                onToggleSave={toggleSave}
                 onSelect={(t) => setSelectedTalentDetail(t)}
                 onHire={(t) => setSelectedTalentHire(t)}
                 onSkillClick={handleSkillClick}
@@ -219,6 +250,15 @@ export default function Home() {
         isOpen={isJoinOpen}
         onClose={() => setIsJoinOpen(false)}
         onAddTalent={handleAddTalent}
+      />
+
+      <SavedModal
+        isOpen={isSavedOpen}
+        onClose={() => setIsSavedOpen(false)}
+        savedTalents={talents.filter((t) => savedIds.includes(t.id))}
+        onRemove={toggleSave}
+        onSelectTalent={(t) => setSelectedTalentDetail(t)}
+        onHireTalent={(t) => setSelectedTalentHire(t)}
       />
 
       {/* Footer */}

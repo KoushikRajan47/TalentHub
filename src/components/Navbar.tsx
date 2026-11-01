@@ -1,17 +1,21 @@
 "use client";
 
-import { Sparkles, Users, Search, PlusCircle } from "lucide-react";
+import { Sparkles, Users, Search, PlusCircle, Heart } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 
 interface NavbarProps {
   onOpenAIMatch: () => void;
   onOpenJoin: () => void;
+  onOpenSaved: () => void;
+  savedCount: number;
   totalTalents: number;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenAIMatch,
   onOpenJoin,
+  onOpenSaved,
+  savedCount,
   totalTalents,
 }) => {
   return (
@@ -38,13 +42,28 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Center / Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <button
             onClick={onOpenAIMatch}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white shadow-md shadow-indigo-500/25 transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
           >
             <Sparkles className="w-4 h-4 text-yellow-300 animate-pulse" />
-            <span>AI Matchmaker</span>
+            <span className="hidden xs:inline">AI Matchmaker</span>
+            <span className="xs:hidden">Match</span>
+          </button>
+
+          <button
+            onClick={onOpenSaved}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition cursor-pointer"
+            title="View saved candidates"
+          >
+            <Heart className={`w-4 h-4 ${savedCount > 0 ? "text-rose-400 fill-rose-400" : "text-slate-400"}`} />
+            <span className="hidden sm:inline">Saved</span>
+            {savedCount > 0 && (
+              <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-rose-500 text-white">
+                {savedCount}
+              </span>
+            )}
           </button>
 
           <button
