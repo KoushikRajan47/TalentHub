@@ -1,5 +1,6 @@
 # 🚀 TalentHub AI — Vetted Tech & Design Talent Marketplace
 
+[![CI Pipeline](https://github.com/KoushikRajan47/TalentHub/actions/workflows/ci.yml/badge.svg)](https://github.com/KoushikRajan47/TalentHub/actions)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
